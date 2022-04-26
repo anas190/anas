@@ -1,0 +1,41 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Invitation index{% endblock %}
+
+{% block body %}
+    <h1>Invitation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+               
+                <th>Etat</th>
+                  <th>Nom joueur</th>
+                    <th>NomEquipe</th>
+                <th>actions</th>
+              
+            </tr>
+        </thead>
+        <tbody>
+        {% for invitation in invitations %}
+            <tr>
+               
+                <td>{{ invitation.etat }}</td>
+                 <td>{{ invitation.idJoueur.username }}</td>
+ <td>{{ invitation.idEq.nomEquipe }}</td>
+                <td>
+                    <a class="btn btn-success" href="{{ path('app_invitation_show', {'idInvitation': invitation.idInvitation}) }}">show</a>
+                    <a class="btn btn-success" href="{{ path('app_invitation_edit', {'idInvitation': invitation.idInvitation}) }}">edit</a>
+                </td>
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('app_invitation_new') }}">Create new</a>
+{% endblock %}

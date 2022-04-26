@@ -1,0 +1,46 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Equipe index
+{% endblock %}
+
+{% block body %}
+	<h1>Equipe index</h1>
+	<form method= "POST">
+    <input  type="text" name ="nomEquipe">
+     <input  type="submit" value ="recherche  selon nom d'equipe ">
+    </form>
+<a href="{{ path('equipe_pdf') }}"><button class="w3-button w3-lime" style="margin-top:20px;">imprimer</button></a>
+
+	<table class="table ">
+		<thead>
+			<tr>
+				{# <th>IdEquipe</th> #}
+				<th>NomEquipe</th>
+				<th>Nom Responsable</th>
+				<th>N° Invitation</th>
+
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for equipe in equipes %}
+				<tr>
+					{# <td>{{ equipe.idEquipe }}</td> #}
+					<td>{{ equipe.nomEquipe }}</td>
+					<td>{{ equipe.idResponsable.nom }}</td>
+						<td>{{ nbinv[equipe.idEquipe ] }}</td>
+					<td>
+						<a href="{{ path('app_equipe_admin_show', {'idEquipe': equipe.idEquipe}) }}">show</a>
+						<a href="{{ path('app_equipe_admin_edit', {'idEquipe': equipe.idEquipe}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="3">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_equipe_admin_new') }}">Create new</a>
+{% endblock %}
